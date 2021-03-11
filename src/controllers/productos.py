@@ -46,7 +46,7 @@ def crear_producto():
 
 def editar_producto(id):
     productosModel = ProductosModel()
-    
+
     if request.method == 'GET':
         
         return render_template('productos/editar.html')
@@ -59,5 +59,5 @@ def editar_producto(id):
     precioDeCompra = request.form.get('precioDeCompra')
     estado = request.form.get('estado')
 
-
+ 
     return redirect(url_for('productos'))
