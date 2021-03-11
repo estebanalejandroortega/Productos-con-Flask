@@ -13,31 +13,28 @@
 
 
 -- Volcando estructura de base de datos para flask_mvc
-CREATE DATABASE IF NOT EXISTS `flask_mvc` /*!40100 DEFAULT CHARACTER SET latin1 */; 
+CREATE DATABASE IF NOT EXISTS `flask_mvc` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `flask_mvc`;
 
 -- Volcando estructura para tabla flask_mvc.productos
 CREATE TABLE IF NOT EXISTS `productos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(20) NOT NULL,
-  `Descripcion` varchar(100) NOT NULL DEFAULT '',
-  `precioDeVenta` int(15) NOT NULL DEFAULT 0,
-  `precioDeCompra` int(15) NOT NULL DEFAULT 0,
-  `Estado` varchar(10) NOT NULL DEFAULT '',
+  `nombre` varchar(255) NOT NULL,
+  `descripcion` mediumtext DEFAULT 'Ninguna',
+  `precio_venta` varchar(255) NOT NULL,
+  `precio_compra` varchar(255) NOT NULL,
+  `ganancia` varchar(255) NOT NULL,
+  `estado` varchar(255) NOT NULL DEFAULT 'Activo',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
 
 -- Volcando datos para la tabla flask_mvc.productos: ~4 rows (aproximadamente)
 /*!40000 ALTER TABLE `productos` DISABLE KEYS */;
-INSERT INTO `productos` (`id`, `nombre`, `Descripcion`, `precioDeVenta`, `precioDeCompra`, `Estado`) VALUES
-	(1, 'Leche', 'Leche Entera Colanta', 2500, 900, 'Activo'),
-	(2, 'Gaseosa', 'Gaseosa 1.5L Postobon', 3400, 1700, 'Activo'),
-	(3, 'Galleta', 'Galleta Wafer ', 500, 100, 'Inactivo'),
-	(4, 'Arroz', 'Arroz Diana', 2000, 800, 'Inactivo'),
-	(5, 'Papas', 'Papas Margarita', 1200, 300, 'Activo'),
-	(6, 'Licuadora', 'Licuadora marca imusa', 60000, 25000, 'Activo'),
-	(7, 'Azúcar', '1Kg Azúcar manuelita ', 2000, 900, 'Inactivo'),
-	(8, 'Salsa de Tomate', 'Salsa de tomate Fruco 250gr', 4300, 1800, 'Activo');
+INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `precio_venta`, `precio_compra`, `ganancia`, `estado`) VALUES
+	(25, 'Leche', 'Leche Entera Colanta', '6000', '2500', '140', 'Activo'),
+	(26, 'Gaseosa', 'Gaseosa 1.5L Postobon', '3400', '1700', '100', 'Activo'),
+	(27, 'Galleta', 'Galleta Wafer', '500', '100', '400', 'Activo'),
+	(28, 'Arroz', 'Arroz Diana', '2000', '800', '150', 'Inactivo');
 /*!40000 ALTER TABLE `productos` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

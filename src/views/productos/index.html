@@ -7,7 +7,6 @@
 {% block contenido %}
     <h1>Listado de Productos</h1>
     <a href="{{ url_for('crear_producto') }}">Crear</a>
-    <a href="{{ url_for('editar_producto') }}">Editar</a>
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -16,7 +15,9 @@
                 <th>Descripción</th>
                 <th>Precio de venta</th>
                 <th>Precio de compra</th>
+                <th>Ganancia</th>
                 <th>Estado</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -28,6 +29,11 @@
                     <td>{{ producto[3] }}</td>
                     <td>{{ producto[4] }}</td>
                     <td>{{ producto[5] }}</td>
+                    <td>{{ producto[6] }}</td>
+                    <td>
+                        <button class="btn btn-success" ><a href="{{url_for('editar_producto', id=producto[0])}}">Editar</a></button>
+                        <button class="btn btn-success" ><a href="{{url_for('eliminar_producto', id=producto[0])}}">Eliminar</a></button>
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>

@@ -11,7 +11,6 @@ def productos():
     return render_template('productos/index.html', productos = productos)
 
 @app.route('/productos/crear', methods = ['GET', 'POST'])
-
 def crear_producto():
     #Esta funcion me sirve para mostrar el fprmulario de creacion
     #y también para crear un nuevo producto
@@ -24,17 +23,19 @@ def crear_producto():
     
     nombre = request.form.get('nombre')
     descripcion = request.form.get('descripcion')
-    precioDeVenta = request.form.get('precioDeVenta')
-    precioDeCompra = request.form.get('precioDeCompra')
+    precioDeVenta = request.form.get('precio_venta')
+    precioDeCompra = request.form.get('precio_compra')
     estado = request.form.get('estado')
+    ganancia = request.form.get('ganancia')
 
-    
+    print(precioDeVenta)
   
     productoData = {
         'nombre' : nombre,
         'descripcion' : descripcion,
         'precioDeVenta' : float(precioDeVenta),
         'precioDeCompra' : float(precioDeCompra),
+        'ganancia' : float(ganancia),
         'estado' : estado
     }
     productosModel = ProductosModel()
@@ -42,22 +43,31 @@ def crear_producto():
 
     return redirect(url_for('productos'))
 
-@app.route('/productos/editar/<int:id>', methods=['GET','POST'])
-
+@app.route('/productos/editar/<int:id>', methods = ['GET', 'POST'])
 def editar_producto(id):
     productosModel = ProductosModel()
-
     if request.method == 'GET':
-        
-        return render_template('productos/editar.html')
-    
-    #Acá es la edición del producto
-    
-    nombre = request.form.get('nombre')
-    descripcion = request.form.get('descripcion')
-    precioDeVenta = request.form.get('precioDeVenta')
-    precioDeCompra = request.form.get('precioDeCompra')
+        producto = productosModel.select(id)  
+        return render_template('productos/editar.html', producto = producto)
+    nombre = request.form.get('nombre')   
+    descripcion = request.form.get('descripcion')   
+    precioDeCompra = request.form.get('precio_compra')  
+    precioDeVenta = request.form.get('precio_venta')   
+    ganancia = request.form.get('ganancia') 
     estado = request.form.get('estado')
+    productoData = {
+        'nombre' : nombre,
+        'descripcion' : descripcion,
+        'precioDeVenta' : float(precioDeVenta),
+        'precioDeCompra' : float(precioDeCompra),
+        'ganancia' : float(ganancia),
+        'estado' : estado
+    }
+    productosModel.editar(id,productoData)
+    return redirect(url_for('productos'))
 
- 
+@app.route('/productos/eliminar/<int:id>', methods = ['GET', 'POST'])
+def eliminar_producto(id):
+    productosModel = ProductosModel()
+    productosModel.eliminar(id)
     return redirect(url_for('productos'))
