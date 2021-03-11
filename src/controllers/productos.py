@@ -41,3 +41,23 @@ def crear_producto():
     productosModel.crear(productoData)
 
     return redirect(url_for('productos'))
+
+@app.route('/productos/editar/<int:id>', methods=['GET','POST'])
+
+def editar_producto(id):
+    productosModel = ProductosModel()
+    
+    if request.method == 'GET':
+        
+        return render_template('productos/editar.html')
+    
+    #Acá es la edición del producto
+    
+    nombre = request.form.get('nombre')
+    descripcion = request.form.get('descripcion')
+    precioDeVenta = request.form.get('precioDeVenta')
+    precioDeCompra = request.form.get('precioDeCompra')
+    estado = request.form.get('estado')
+
+
+    return redirect(url_for('productos'))

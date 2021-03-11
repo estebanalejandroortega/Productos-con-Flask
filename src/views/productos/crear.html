@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block contenido %}
-<h1>Craer Productos</h1>
+<h1>Crear Productos</h1>
 <a href="{{ url_for('productos') }}">volver</a>
 
 <form action="{{ url_for('crear_producto') }}" method="POST">
@@ -23,12 +23,17 @@
     
     <div class="mb-3">
         <label for="precio_compra">Precio de compra</label>
-        <input type="number" required class="form-control" id="precio_compra" name="precio_compra">
+        <input type="number" required class="form-control" id="precioDeCompra" name="precioDeCompra">
     </div>
 
     <div class="mb-3">
         <label for="precio_venta">Precio de venta</label>
-        <input type="number" required class="form-control" id="precio_venta" name="precio_venta">
+        <input type="number" required class="form-control" id="precioDeVenta" name="precioDeVenta">
+    </div>
+
+    <div class="mb-3">
+        <label for="ganancia">Ganancia (%)</label>
+        <input type="number" required class="form-control" id="ganancia" name="ganancia">
     </div>
 
     <div class="mb-3">
@@ -42,4 +47,35 @@
 
     <button type="submit" class="btn btn-primary">Guardar</button>
 </form>
+<script>
+    
+    let inputprecioDeCompra = document.querySelector('#precioDeCompra')
+    let inputprecioDeVenta = document.querySelector('#precioDeVenta')
+    let inputGanancia = document.querySelector('#ganancia')
+    
+    inputprecioDeCompra.addEventListener('change', cambioprecioDeCompra)
+    function cambioprecioDeCompra(e){
+       console.log('cambiando ganancia')
+    }
+
+    inputprecioDeVenta.addEventListener('change', cambioprecioDeVenta)
+    function cambioprecioDeVenta(e){
+        //Esta cambiando el precio venta
+        // ganancia = (precio_venta / precio_compra) / 100
+        let precioDeVenta = parseInt(inputprecioDeVenta.value)
+        let precioDeCompra = parseInt(inputprecioDeCompra.value)
+        let ganancia = ((precioDeVenta - precioDeCompra)/ precioDeCompra) * 100
+        inputGanancia.value = ganancia
+    }
+
+    inputGanancia.addEventListener('change', cambioGanancia)
+    function cambioGanancia(e){
+        let precioDeCompra = parseInt(inputprecioDeCompra.value)
+        let ganancia = parseInt(inputGanancia.value)
+        let precioDeVenta = (precioDeCompra * (ganancia/100)) + precioDeCompra
+        inputprecioDeVenta.value = precioDeVenta
+    }
+    
+    
+</script>
 {% endblock %}

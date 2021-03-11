@@ -1,12 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends 'layouts/base.html' %}
+
+{% block titulo %}
+    Editar producto
+{% endblock %}
+
+
+{% block contenido %}
+<a href="{{ url_for('productos') }}">volver</a>
+<form method="POST">
+    <div class="mb-3">
+        <label for="nombre">Nombre</label>
+        <input type="text" required class="form-control" id="nombre" name="nombre">
+    </div>
+
+    <div class="mb-3">
+        <label for="descripcion">Descripcion</label>
+        <textarea rows="4" required class="form-control" 
+            id="descripcion" 
+            name="descripcion"></textarea>
+    </div>
     
-</body>
-</html>
+    <div class="mb-3">
+        <label for="precio_compra">Precio de compra</label>
+        <input type="number" required class="form-control" id="precioDeCompra" name="precioDeCompra">
+    </div>
+
+    <div class="mb-3">
+        <label for="precio_venta">Precio de venta</label>
+        <input type="number" required class="form-control" id="precioDeVenta" name="precioDeVenta">
+    </div>
+
+    <div class="mb-3">
+        <label for="ganancia">Ganancia (%)</label>
+        <input type="number" required class="form-control" id="ganancia" name="ganancia">
+    </div>
+
+    <div class="mb-3">
+        <label for="estado">Estado de producto</label>
+        <select class="form-select" required id="estado" name="estado">
+            <option selected value="">Selecione una opción</option>
+            <option value="1">Activo</option>
+            <option value="0">Inactivo</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar</button>
+</form>
+{% endblock %}
+
+
